@@ -7,4 +7,5 @@ submissions.db-journal
 .vercel
 dist
 build
+server.js
 
