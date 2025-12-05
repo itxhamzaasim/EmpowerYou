@@ -46,7 +46,16 @@ module.exports = async (req, res) => {
   } 
   // DELETE - Delete a submission
   else if (req.method === 'DELETE') {
-    const id = parseInt(req.query.id || req.body.id);
+    // Parse body if needed
+    let body = req.body;
+    if (typeof body === 'string') {
+      try {
+        body = JSON.parse(body);
+      } catch (e) {
+        // Ignore parse errors
+      }
+    }
+    const id = parseInt(req.query.id || (body && body.id));
     if (!id) {
       return res.status(400).json({ 
         success: false, 

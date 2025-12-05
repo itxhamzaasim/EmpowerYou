@@ -15,7 +15,17 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const { name, email, course, message } = req.body;
+    // Parse JSON body (Vercel doesn't auto-parse)
+    let body = req.body;
+    if (typeof body === 'string') {
+      try {
+        body = JSON.parse(body);
+      } catch (e) {
+        return res.status(400).json({ success: false, message: 'Invalid JSON' });
+      }
+    }
+    
+    const { name, email, course, message } = body;
 
     // Validation
     if (!name || !email || !course) {
@@ -56,7 +66,7 @@ module.exports = async (req, res) => {
         }
         
         console.log(`✓ Submission saved: ${name}, ${email}, ${course}`);
-        return res.json({
+        res.json({
           success: true,
           message: 'Thank you! We have received your enrollment request.'
         });

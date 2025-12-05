@@ -52,8 +52,8 @@ let inMemoryStore = [];
 let nextId = 1;
 
 function getInMemoryDatabase() {
-  return {
-    run: (query, params, callback) => {
+  const mockDb = {
+    run: function(query, params, callback) {
       if (query.includes('INSERT INTO')) {
         const [name, email, course, message] = params;
         const submission = {
@@ -65,21 +65,27 @@ function getInMemoryDatabase() {
           created_at: new Date().toISOString()
         };
         inMemoryStore.push(submission);
-        if (callback) callback(null, { lastID: submission.id, changes: 1 });
+        if (callback) {
+          // Simulate sqlite3 callback with 'this' context
+          const mockThis = { lastID: submission.id, changes: 1 };
+          callback.call(mockThis, null);
+        }
       } else if (query.includes('DELETE FROM')) {
         const id = params[0];
         const index = inMemoryStore.findIndex(s => s.id === id);
+        const mockThis = { changes: index !== -1 ? 1 : 0 };
         if (index !== -1) {
           inMemoryStore.splice(index, 1);
-          if (callback) callback(null, { changes: 1 });
-        } else {
-          if (callback) callback(null, { changes: 0 });
+        }
+        if (callback) {
+          callback.call(mockThis, null);
         }
       } else if (callback) {
-        callback(null, { changes: 0 });
+        const mockThis = { changes: 0 };
+        callback.call(mockThis, null);
       }
     },
-    all: (query, params, callback) => {
+    all: function(query, params, callback) {
       if (query.includes('SELECT * FROM submissions')) {
         const sorted = [...inMemoryStore].sort((a, b) => 
           new Date(b.created_at) - new Date(a.created_at)
@@ -90,6 +96,7 @@ function getInMemoryDatabase() {
       }
     }
   };
+  return mockDb;
 }
 
 module.exports = { getDatabase };
