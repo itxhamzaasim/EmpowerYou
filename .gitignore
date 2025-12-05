@@ -5,6 +5,7 @@ node_modules/
 submissions.db
 submissions.db-journal
 .vercel
+.netlify
 dist
 build
 

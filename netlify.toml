@@ -1,0 +1,34 @@
+[build]
+  # No build command needed for static site
+  publish = "."
+
+[functions]
+  # Node.js runtime for serverless functions
+  node_bundler = "esbuild"
+  included_files = ["api/**/*.js", "netlify/functions/**/*.js"]
+
+# Redirect rules for API endpoints
+[[redirects]]
+  from = "/api/contact"
+  to = "/.netlify/functions/contact"
+  status = 200
+
+[[redirects]]
+  from = "/api/admin/submissions"
+  to = "/.netlify/functions/admin-submissions"
+  status = 200
+
+[[redirects]]
+  from = "/api/health"
+  to = "/.netlify/functions/health"
+  status = 200
+
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+

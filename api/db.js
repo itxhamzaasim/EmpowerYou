@@ -1,4 +1,4 @@
-// Database utility for both local and Vercel
+// Database utility for local, Vercel, and Netlify
 const path = require('path');
 
 let db = null;
@@ -7,8 +7,8 @@ let sqlite3 = null;
 function getDatabase() {
   if (db) return db;
   
-  // On Vercel, always use in-memory storage (sqlite3 doesn't work well)
-  if (process.env.VERCEL || process.env.VERCEL_ENV) {
+  // On Vercel or Netlify, always use in-memory storage (sqlite3 doesn't persist)
+  if (process.env.VERCEL || process.env.VERCEL_ENV || process.env.NETLIFY || process.env.NETLIFY_DEV) {
     return getInMemoryDatabase();
   }
   
@@ -41,7 +41,7 @@ function getDatabase() {
   }
 }
 
-// In-memory fallback for Vercel
+// In-memory fallback for Vercel and Netlify
 let inMemoryStore = [];
 let nextId = 1;
 
