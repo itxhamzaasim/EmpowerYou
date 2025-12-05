@@ -159,10 +159,8 @@ if (contactForm || joinForm) {
         }
         
         try {
-            // Determine API URL (use relative path for same domain, or full URL for production)
-            const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-                ? 'http://localhost:3000/api/contact'
-                : '/api/contact';
+            // Determine API URL - works for both local and Vercel
+            const apiUrl = '/api/contact';
             
             const response = await fetch(apiUrl, {
                 method: 'POST',

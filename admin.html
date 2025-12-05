@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - EmpowerYou</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .admin-container {
+            margin-top: 100px;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+        .admin-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .admin-header h1 {
+            color: var(--primary-purple);
+            margin-bottom: 0.5rem;
+        }
+        .login-box {
+            max-width: 400px;
+            margin: 5rem auto;
+            background: var(--dark-card);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .login-box h2 {
+            color: var(--primary-purple);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .login-input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 1rem;
+            background: var(--dark-bg);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: var(--dark-text);
+            font-family: 'Poppins', sans-serif;
+        }
+        .login-input:focus {
+            outline: none;
+            border-color: var(--primary-purple);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .stat-box {
+            background: var(--dark-card);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-purple);
+            margin-bottom: 0.5rem;
+        }
+        .stat-label {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+        .submissions-table {
+            background: var(--dark-card);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .table-header {
+            display: grid;
+            grid-template-columns: 50px 1.5fr 1.5fr 1.5fr 2fr 150px 100px;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: rgba(139, 92, 246, 0.1);
+            border-bottom: 2px solid rgba(139, 92, 246, 0.3);
+            font-weight: 600;
+            color: var(--primary-purple);
+        }
+        .table-row {
+            display: grid;
+            grid-template-columns: 50px 1.5fr 1.5fr 1.5fr 2fr 150px 100px;
+            gap: 1rem;
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background 0.3s;
+        }
+        .table-row:hover {
+            background: var(--dark-card-hover);
+        }
+        .table-row:last-child {
+            border-bottom: none;
+        }
+        .table-cell {
+            color: var(--light-text);
+            word-break: break-word;
+        }
+        .table-cell strong {
+            color: var(--dark-text);
+        }
+        .btn-delete {
+            padding: 8px 15px;
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        .btn-delete:hover {
+            background: rgba(239, 68, 68, 0.3);
+            transform: scale(1.05);
+        }
+        .search-box {
+            margin-bottom: 2rem;
+        }
+        .search-input {
+            width: 100%;
+            padding: 15px;
+            background: var(--dark-card);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: var(--dark-text);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-purple);
+        }
+        .no-submissions {
+            text-align: center;
+            padding: 4rem;
+            color: var(--light-text);
+        }
+        .loading {
+            text-align: center;
+            padding: 4rem;
+            color: var(--primary-purple);
+        }
+        @media (max-width: 768px) {
+            .table-header, .table-row {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            .table-header {
+                display: none;
+            }
+            .table-row {
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <h1 class="logo">Empower<span class="logo-red">You</span></h1>
+                    <p class="logo-tagline">Admin Dashboard</p>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="admin.html" class="nav-link">Admin</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Login Screen -->
+    <div id="loginScreen" class="admin-container">
+        <div class="login-box">
+            <h2>Admin Login</h2>
+            <input type="password" id="adminPassword" class="login-input" placeholder="Enter Admin Password" autocomplete="off">
+            <button class="btn btn-primary" onclick="login()" style="width: 100%;">Login</button>
+            <div id="loginError" style="color: #ef4444; margin-top: 1rem; text-align: center; display: none;"></div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="dashboard" class="admin-container" style="display: none;">
+        <div class="container">
+            <div class="admin-header">
+                <h1>Admin Dashboard</h1>
+                <p style="color: var(--light-text);">View and manage all enrollment submissions</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-number" id="totalSubmissions">0</div>
+                    <div class="stat-label">Total Submissions</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="todaySubmissions">0</div>
+                    <div class="stat-label">Today's Submissions</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="amazonCount">0</div>
+                    <div class="stat-label">Amazon VA</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="webdevCount">0</div>
+                    <div class="stat-label">Web Development</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="graphicsCount">0</div>
+                    <div class="stat-label">Graphic Design</div>
+                </div>
+            </div>
+
+            <div class="search-box">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search by name, email, or course...">
+            </div>
+
+            <div class="submissions-table">
+                <div class="table-header">
+                    <div>ID</div>
+                    <div>Name</div>
+                    <div>Email</div>
+                    <div>Course</div>
+                    <div>Message</div>
+                    <div>Date</div>
+                    <div>Action</div>
+                </div>
+                <div id="submissionsList">
+                    <div class="loading">Loading submissions...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let adminPassword = '';
+        const API_URL = ''; // Use relative paths for Vercel compatibility
+
+        function login() {
+            const password = document.getElementById('adminPassword').value;
+            if (!password) {
+                showLoginError('Please enter password');
+                return;
+            }
+            adminPassword = password;
+            loadSubmissions();
+        }
+
+        function showLoginError(message) {
+            const errorDiv = document.getElementById('loginError');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 3000);
+        }
+
+        function loadSubmissions() {
+            fetch(`${API_URL}/api/admin/submissions?admin_pass=${adminPassword}`)
+                .then(res => {
+                    if (res.status === 401) {
+                        showLoginError('Invalid password');
+                        return null;
+                    }
+                    return res.json();
+                })
+                .then(data => {
+                    if (!data) return;
+                    if (data.success) {
+                        document.getElementById('loginScreen').style.display = 'none';
+                        document.getElementById('dashboard').style.display = 'block';
+                        displaySubmissions(data.submissions);
+                    }
+                })
+                .catch(err => {
+                    console.error('Error:', err);
+                    showLoginError('Failed to load submissions. Make sure server is running.');
+                });
+        }
+
+        function displaySubmissions(submissions) {
+            const container = document.getElementById('submissionsList');
+            
+            if (!submissions || submissions.length === 0) {
+                container.innerHTML = '<div class="no-submissions">No submissions yet</div>';
+                updateStats([]);
+                return;
+            }
+
+            updateStats(submissions);
+
+            let html = '';
+            submissions.forEach(sub => {
+                const date = new Date(sub.created_at).toLocaleString('en-US', { 
+                    timeZone: 'Asia/Karachi',
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                html += `
+                    <div class="table-row">
+                        <div class="table-cell"><strong>#${sub.id}</strong></div>
+                        <div class="table-cell"><strong>${escapeHtml(sub.name)}</strong></div>
+                        <div class="table-cell"><a href="mailto:${escapeHtml(sub.email)}" style="color: var(--primary-blue);">${escapeHtml(sub.email)}</a></div>
+                        <div class="table-cell">${escapeHtml(sub.course)}</div>
+                        <div class="table-cell">${escapeHtml(sub.message || 'No message')}</div>
+                        <div class="table-cell" style="font-size: 0.9rem;">${date}</div>
+                        <div class="table-cell">
+                            <button class="btn-delete" onclick="deleteSubmission(${sub.id})">Delete</button>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+
+            // Add search functionality
+            document.getElementById('searchInput').addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const rows = container.querySelectorAll('.table-row');
+                rows.forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    row.style.display = text.includes(searchTerm) ? 'grid' : 'none';
+                });
+            });
+        }
+
+        function updateStats(submissions) {
+            document.getElementById('totalSubmissions').textContent = submissions.length;
+            
+            const today = new Date().toDateString();
+            const todayCount = submissions.filter(s => {
+                const subDate = new Date(s.created_at).toDateString();
+                return subDate === today;
+            }).length;
+            document.getElementById('todaySubmissions').textContent = todayCount;
+
+            document.getElementById('amazonCount').textContent = 
+                submissions.filter(s => s.course.includes('Amazon')).length;
+            document.getElementById('webdevCount').textContent = 
+                submissions.filter(s => s.course.includes('Web Development')).length;
+            document.getElementById('graphicsCount').textContent = 
+                submissions.filter(s => s.course.includes('Graphic')).length;
+        }
+
+        function deleteSubmission(id) {
+            if (!confirm('Are you sure you want to delete this submission?')) return;
+
+            fetch(`${API_URL}/api/admin/submissions?admin_pass=${adminPassword}&id=${id}`, {
+                method: 'DELETE'
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    loadSubmissions();
+                } else {
+                    alert('Failed to delete submission');
+                }
+            })
+            .catch(err => {
+                console.error('Error:', err);
+                alert('Error deleting submission');
+            });
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Allow Enter key to login
+        document.getElementById('adminPassword').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                login();
+            }
+        });
+    </script>
+</body>
+</html>
+

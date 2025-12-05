@@ -107,4 +107,3 @@ If you encounter issues:
 - Ensure Gmail App Password is correct
 - Test email sending manually
 
-

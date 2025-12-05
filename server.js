@@ -74,6 +74,25 @@ app.get('/api/admin/submissions', (req, res) => {
   });
 });
 
+// Admin: Delete a submission
+app.delete('/api/admin/submissions/:id', (req, res) => {
+  const adminPass = process.env.ADMIN_PASS || 'empoweryou123';
+  if (req.query.admin_pass !== adminPass) {
+    return res.status(401).json({ success: false, message: 'Unauthorized' });
+  }
+  const id = parseInt(req.params.id);
+  db.run('DELETE FROM submissions WHERE id = ?', [id], function(err) {
+    if (err) {
+      return res.status(500).json({ success: false, message: 'Database error' });
+    }
+    if (this.changes === 0) {
+      return res.status(404).json({ success: false, message: 'Submission not found' });
+    }
+    console.log(`✓ Deleted submission ID: ${id}`);
+    res.json({ success: true, message: 'Submission deleted successfully' });
+  });
+});
+
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Server is running', db: 'sqlite' });
@@ -96,7 +115,8 @@ app.listen(PORT, () => {
   console.log('🚀 EmpowerYou Backend Server (Database: SQLite)');
   console.log(`DB Path: submissions.db`);
   console.log(`API Endpoint: http://localhost:${PORT}/api/contact`);
-  console.log(`Admin View:   http://localhost:${PORT}/api/admin/submissions?admin_pass=YOURPASS`);
+  console.log(`Admin Page:   http://localhost:${PORT}/admin.html`);
+  console.log(`Admin API:    http://localhost:${PORT}/api/admin/submissions?admin_pass=empoweryou123`);
   console.log('========================================\n');
 });
 

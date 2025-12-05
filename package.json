@@ -1,7 +1,7 @@
 {
-  "name": "empoweryou-backend",
+  "name": "empoweryou",
   "version": "1.0.0",
-  "description": "Backend server for EmpowerYou contact form",
+  "description": "EmpowerYou - Online Learning Platform",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -10,8 +10,9 @@
   },
   "keywords": [
     "empoweryou",
-    "backend",
-    "contact-form"
+    "online-learning",
+    "education",
+    "courses"
   ],
   "author": "",
   "license": "ISC",
@@ -20,10 +21,12 @@
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "nodemailer": "^6.9.7",
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=14.x"
   }
 }

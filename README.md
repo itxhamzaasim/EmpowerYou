@@ -4,6 +4,23 @@
 
 EmpowerYou is a social entrepreneurship program dedicated to making quality education accessible to everyone. We offer affordable, low-cost courses designed to help individuals learn valuable skills, earn income online, and grow their careers.
 
+## 🌐 Live Website
+
+- **Website**: [View Live Site](https://your-project.vercel.app)
+- **Admin Dashboard**: [Admin Panel](https://your-project.vercel.app/admin.html)
+
+## 🚀 Quick Start
+
+### Local Development
+```bash
+npm install
+npm start
+```
+Server runs on `http://localhost:3000`
+
+### Deploy to Vercel
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed instructions.
+
 ## 🌟 Features
 
 - **Three Main Courses:**
@@ -121,5 +138,4 @@ This project is part of the Social Entrepreneurship Program (SEP) and Entreprene
 ---
 
 **EmpowerYou** - Empowering individuals through affordable, quality education.
-
 
