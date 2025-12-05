@@ -7,22 +7,16 @@ let sqlite3 = null;
 function getDatabase() {
   if (db) return db;
   
-  try {
-    // Try to load sqlite3 (may fail on Vercel)
-    sqlite3 = require('sqlite3').verbose();
-  } catch (error) {
-    console.warn('sqlite3 not available, using in-memory storage');
-    // Fallback to in-memory storage for Vercel
+  // On Vercel, always use in-memory storage (sqlite3 doesn't work well)
+  if (process.env.VERCEL || process.env.VERCEL_ENV) {
     return getInMemoryDatabase();
   }
   
-  // For Vercel, use /tmp directory (writable)
-  // For local, use current directory
-  const dbPath = process.env.VERCEL 
-    ? '/tmp/submissions.db'
-    : path.join(process.cwd(), 'submissions.db');
-  
+  // Try to use sqlite3 for local development
   try {
+    sqlite3 = require('sqlite3').verbose();
+    const dbPath = path.join(process.cwd(), 'submissions.db');
+    
     db = new sqlite3.Database(dbPath, (err) => {
       if (err) {
         console.error('Failed to open DB:', err.message);
@@ -42,7 +36,7 @@ function getDatabase() {
     
     return db;
   } catch (error) {
-    console.error('Database initialization error:', error);
+    console.warn('sqlite3 not available, using in-memory storage');
     return getInMemoryDatabase();
   }
 }
