@@ -1,5 +1,6 @@
 // Database utility for local, Vercel, and Netlify
 const path = require('path');
+const { getSupabaseDatabase } = require('./supabase');
 
 let db = null;
 let sqlite3 = null;
@@ -7,8 +8,19 @@ let sqlite3 = null;
 function getDatabase() {
   if (db) return db;
   
-  // On Vercel or Netlify, always use in-memory storage (sqlite3 doesn't persist)
+  // Priority 1: Use Supabase if credentials are available (for permanent cloud storage)
+  if (process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY) {
+    const supabaseDb = getSupabaseDatabase();
+    if (supabaseDb) {
+      console.log('✓ Using Supabase (permanent cloud database)');
+      db = supabaseDb;
+      return db;
+    }
+  }
+  
+  // Priority 2: On Vercel or Netlify without Supabase, use in-memory storage
   if (process.env.VERCEL || process.env.VERCEL_ENV || process.env.NETLIFY || process.env.NETLIFY_DEV) {
+    console.warn('⚠️ Using in-memory storage (data will be lost). Set up Supabase for permanent storage.');
     return getInMemoryDatabase();
   }
   
