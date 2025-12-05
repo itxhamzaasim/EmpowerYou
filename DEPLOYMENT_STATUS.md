@@ -67,4 +67,3 @@ Once deployed, test:
 - `https://your-project.vercel.app/` - Should show homepage
 - `https://your-project.vercel.app/admin.html` - Should show admin page
 
-
