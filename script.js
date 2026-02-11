@@ -274,49 +274,6 @@ if (orderForm) {
     });
 }
 
-// Home page "Make your blend" mini-recommendation
-const blendForm = document.getElementById('blendForm');
-
-if (blendForm) {
-    const blendFlour = document.getElementById('blendFlour');
-    const blendText = document.getElementById('blendText');
-    const blendCard = document.getElementById('blendResult');
-    const blendNext = document.getElementById('blendNext');
-
-    blendForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        const ageRange = document.getElementById('blendAge').value;
-        const gender = document.getElementById('blendGender').value;
-        const lifestyle = document.getElementById('blendLifestyle').value;
-        const healthGoal = document.getElementById('blendGoal').value;
-
-        if (!ageRange || !gender || !lifestyle || !healthGoal) {
-            blendForm.style.animation = 'shake 0.5s';
-            setTimeout(() => {
-                blendForm.style.animation = '';
-            }, 500);
-            return;
-        }
-
-        const { flour, tagline } = getFlourRecommendation({
-            ageRange,
-            gender,
-            lifestyle,
-            healthGoal
-        });
-
-        blendFlour.textContent = flour;
-        blendText.textContent = tagline;
-
-        // Link to order page with flour pre-selected (relative URL so it works locally and when hosted)
-        const encodedFlour = encodeURIComponent(flour);
-        blendNext.href = `contact.html?flour=${encodedFlour}#order`;
-
-        blendCard.classList.remove('hidden');
-    });
-}
-
 // Add shake animation
 const style = document.createElement('style');
 style.textContent = `
