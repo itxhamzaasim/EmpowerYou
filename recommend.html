@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Flour Match - Flour Lab</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <img src="assets/flour-lab-logo.png" alt="Flour Lab logo" class="logo-image">
+                    <p class="logo-tagline">Personalized smart flour blends for daily health.</p>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html#home" class="nav-link">Home</a></li>
+                    <li><a href="recommend.html" class="nav-link active">Smart Match</a></li>
+                    <li><a href="index.html#how-it-works" class="nav-link">How It Works</a></li>
+                    <li><a href="index.html#products" class="nav-link">Flour Categories</a></li>
+                    <li><a href="index.html#why-flour-lab" class="nav-link">Why Flour Lab</a></li>
+                    <li><a href="contact.html" class="nav-link">Order / Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="recommend-section">
+        <div class="container">
+            <h2 class="section-title">Find Your Perfect Flour Blend</h2>
+            <p class="section-subtitle">Answer a few quick questions about your lifestyle and health goals. We’ll recommend the Flour Lab blend that fits you best.</p>
+
+            <div class="recommend-grid">
+                <div class="recommend-intro">
+                    <p>
+                        Flour Lab uses nutrition science and simple data points to move you from generic flour to
+                        <strong>personalized daily nutrition</strong>. This smart match tool is especially helpful for:
+                    </p>
+                    <div class="recommend-badges">
+                        <span class="badge-soft">Diabetic patients</span>
+                        <span class="badge-soft">Women with iron deficiency</span>
+                        <span class="badge-soft">Gym & fitness users</span>
+                        <span class="badge-soft">People avoiding gluten</span>
+                        <span class="badge-soft">Families wanting healthier rotis</span>
+                    </div>
+                    <p>
+                        It takes less than a minute. You can order directly from the recommendation card with Cash on Delivery across Pakistan.
+                    </p>
+                </div>
+
+                <div class="recommend-form">
+                    <form id="recommendationForm">
+                        <div class="form-group two-columns">
+                            <div class="form-control">
+                                <label for="ageRange">Age</label>
+                                <select id="ageRange" name="ageRange" required>
+                                    <option value="">Select age range</option>
+                                    <option value="18-30">18–30</option>
+                                    <option value="31-45">31–45</option>
+                                    <option value="46-60">46–60</option>
+                                    <option value="60+">60+</option>
+                                </select>
+                            </div>
+                            <div class="form-control">
+                                <label for="gender">Gender</label>
+                                <select id="gender" name="gender" required>
+                                    <option value="">Select</option>
+                                    <option value="female">Female</option>
+                                    <option value="male">Male</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-control">
+                                <label for="lifestyleMatch">Lifestyle</label>
+                                <select id="lifestyleMatch" name="lifestyleMatch" required>
+                                    <option value="">Select lifestyle</option>
+                                    <option value="office">Office / Desk Job</option>
+                                    <option value="active">Active / On Feet</option>
+                                    <option value="gym">Gym / Workout</option>
+                                    <option value="home-based">Home-Based</option>
+                                    <option value="weight-loss">Weight Loss Focus</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-control">
+                                <label for="healthGoalMatch">Main Health Goal</label>
+                                <select id="healthGoalMatch" name="healthGoalMatch" required>
+                                    <option value="">Select goal</option>
+                                    <option value="diabetes">Diabetes / sugar control</option>
+                                    <option value="weight-loss">Weight loss</option>
+                                    <option value="fitness">Fitness / muscle & performance</option>
+                                    <option value="women-health">Women’s health & iron</option>
+                                    <option value="gluten-free">Gluten intolerance / can’t eat regular wheat</option>
+                                    <option value="general-health">General family health</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-join">Find My Flour Blend</button>
+                    </form>
+
+                    <div id="recommendationResult" class="recommendation-result hidden">
+                        <h3 class="recommendation-title" id="recName"></h3>
+                        <p class="recommendation-subtitle" id="recTagline"></p>
+
+                        <ul class="recommendation-benefits" id="recBenefits"></ul>
+
+                        <a id="recOrderLink" href="contact.html#order" class="btn btn-secondary" style="margin-right: 0.5rem;">
+                            Order this Flour (COD)
+                        </a>
+                        <a href="index.html#products" class="btn btn-secondary">
+                            View all Flour Categories
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Flour <span class="logo-red">Lab</span></h3>
+                    <p>Smart flour for everyday health.</p>
+                    <p class="footer-tagline">We are not just selling flour — we are providing personalized nutrition for every home.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#home">Home</a></li>
+                        <li><a href="index.html#how-it-works">How It Works</a></li>
+                        <li><a href="index.html#products">Flour Categories</a></li>
+                        <li><a href="recommend.html">Smart Match</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Key Categories</h4>
+                    <ul>
+                        <li><a href="index.html#products">Gluten-Free Flour</a></li>
+                        <li><a href="index.html#products">Diabetic-Friendly Flour</a></li>
+                        <li><a href="index.html#products">Multi-Grain Flour</a></li>
+                        <li><a href="index.html#products">High-Iron Women’s Atta</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="contact.html#order">Place an Order</a></li>
+                        <li><a href="index.html#business">Business Model</a></li>
+                        <li><a href="index.html#future">Future Vision</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Flour Lab. All rights reserved. | Health-Focused Food Technology Startup</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

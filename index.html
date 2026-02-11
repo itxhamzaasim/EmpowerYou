@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EmpowerYou - Learn. Earn. Grow</title>
+    <title>Flour Lab - Smart Flour for Everyday Health</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,16 +15,17 @@
         <nav class="navbar">
             <div class="container">
                 <div class="nav-brand">
-                    <h1 class="logo">Empower<span class="logo-red">You</span></h1>
-                    <p class="logo-tagline">Learn. Earn. <span class="tagline-red">Grow.</span></p>
+                    <img src="assests/flour-lab-logo.png.jpeg" alt="Flour Lab logo" class="logo-image">
+                    <p class="logo-tagline">Personalized smart flour blends for daily health.</p>
                 </div>
                 <ul class="nav-menu">
-                    <li><a href="index.html" class="nav-link">Home</a></li>
-                    <li><a href="courses.html" class="nav-link">Courses</a></li>
-                    <li><a href="about.html" class="nav-link">About</a></li>
-                    <li><a href="impact.html" class="nav-link">Impact</a></li>
-                    <li><a href="team.html" class="nav-link">Team</a></li>
-                    <li><a href="contact.html" class="nav-link">Join Us</a></li>
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="recommend.html" class="nav-link">Smart Match</a></li>
+                    <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+                    <li><a href="#products" class="nav-link">Flour Categories</a></li>
+                    <li><a href="#why-flour-lab" class="nav-link">Why Flour Lab</a></li>
+                    <li><a href="#future" class="nav-link">Future Vision</a></li>
+                    <li><a href="contact.html" class="nav-link">Order / Contact</a></li>
                 </ul>
                 <div class="hamburger">
                     <span></span>
@@ -38,13 +39,18 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1 class="hero-title">Empower<span class="hero-red">You</span></h1>
-            <p class="hero-tagline">Learn. Earn. <span class="tagline-red">Grow.</span></p>
-            <p class="hero-description">Affordable, quality skill training for everyone. Build your future from home.</p>
+            <h1 class="hero-title">Flour <span class="hero-red">Lab</span></h1>
+            <p class="hero-tagline">Smart flour blends for your everyday health.</p>
+            <p class="hero-description">
+                Flour Lab is a health-focused food technology startup that transforms traditional flour
+                into personalized daily nutrition. Using nutrition science and smart recommendations,
+                we create specialized blends for diabetics, women, fitness enthusiasts, children, and
+                anyone who wants better health from every roti.
+            </p>
             <div class="hero-buttons">
-                <a href="contact.html" class="btn btn-primary btn-join">Join Us</a>
-                <a href="courses.html" class="btn btn-secondary">Explore Courses</a>
-                <a href="about.html" class="btn btn-secondary">Learn More</a>
+                <a href="#blend" class="btn btn-primary btn-join">Get Your Blend</a>
+                <a href="#products" class="btn btn-secondary">Explore Flour Categories</a>
+                <a href="#why-flour-lab" class="btn btn-secondary">Why Flour Lab?</a>
             </div>
         </div>
         <div class="hero-image">
@@ -55,136 +61,358 @@
                 <div class="animated-shape shape-4"></div>
                 <div class="animated-shape shape-5"></div>
                 <div class="code-animation">
-                    <div class="code-line"><span class="code-keyword">Learn</span> <span class="code-string">"New Skills"</span></div>
-                    <div class="code-line"><span class="code-keyword">Earn</span> <span class="code-string">"Online Income"</span></div>
-                    <div class="code-line"><span class="code-keyword">Grow</span> <span class="code-string">"Your Career"</span></div>
+                    <div class="code-line"><span class="code-keyword">Blend</span> <span class="code-string">"Smart Flour"</span></div>
+                    <div class="code-line"><span class="code-keyword">Match</span> <span class="code-string">"Your Lifestyle"</span></div>
+                    <div class="code-line"><span class="code-keyword">Nourish</span> <span class="code-string">"Every Meal"</span></div>
                 </div>
             </div>
             <div class="floating-card card-1">
-                <div class="card-icon-animated">📚</div>
-                <p>Learn</p>
+                <div class="card-icon-animated">🌾</div>
+                <p>Personalized Grains</p>
             </div>
             <div class="floating-card card-2">
-                <div class="card-icon-animated">💰</div>
-                <p>Earn</p>
+                <div class="card-icon-animated">❤️</div>
+                <p>Health Goals</p>
             </div>
             <div class="floating-card card-3">
-                <div class="card-icon-animated">🚀</div>
-                <p>Grow</p>
+                <div class="card-icon-animated">🥖</div>
+                <p>Everyday Meals</p>
             </div>
         </div>
     </section>
 
-    <!-- Problem Section -->
-    <section class="problem-section">
+    <!-- Quick Blend Recommendation on Home -->
+    <section id="blend" class="recommend-section" style="padding-top: 3rem;">
         <div class="container">
-            <h2 class="section-title">The Challenge</h2>
+            <h2 class="section-title">Make Your Blend</h2>
+            <p class="section-subtitle">Tell us a bit about yourself and we’ll suggest the best Flour Lab blend for you.</p>
+
+            <div class="recommend-grid">
+                <div class="recommend-intro">
+                    <p>
+                        In Pakistan, roti is eaten every single day. Flour Lab makes that daily habit smarter by matching
+                        the flour to your <strong>age, gender, lifestyle and health goal</strong>.
+                    </p>
+                    <p>
+                        Use this mini tool to see which blend fits you best, then tap <strong>Next: Order</strong> to place a simple
+                        Cash on Delivery order.
+                    </p>
+                </div>
+
+                <div class="recommend-form">
+                    <form id="blendForm">
+                        <div class="form-group two-columns">
+                            <div class="form-control">
+                                <label for="blendAge">Age</label>
+                                <select id="blendAge" required>
+                                    <option value="">Select age range</option>
+                                    <option value="18-30">18–30</option>
+                                    <option value="31-45">31–45</option>
+                                    <option value="46-60">46–60</option>
+                                    <option value="60+">60+</option>
+                                </select>
+                            </div>
+                            <div class="form-control">
+                                <label for="blendGender">Gender</label>
+                                <select id="blendGender" required>
+                                    <option value="">Select</option>
+                                    <option value="female">Female</option>
+                                    <option value="male">Male</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group two-columns">
+                            <div class="form-control">
+                                <label for="blendLifestyle">Lifestyle</label>
+                                <select id="blendLifestyle" required>
+                                    <option value="">Select lifestyle</option>
+                                    <option value="office">Office / Desk Job</option>
+                                    <option value="active">Active / On Feet</option>
+                                    <option value="gym">Gym / Workout</option>
+                                    <option value="home-based">Home-Based</option>
+                                    <option value="weight-loss">Weight Loss Focus</option>
+                                </select>
+                            </div>
+                            <div class="form-control">
+                                <label for="blendGoal">Main Health Goal</label>
+                                <select id="blendGoal" required>
+                                    <option value="">Select goal</option>
+                                    <option value="diabetes">Diabetes / sugar control</option>
+                                    <option value="weight-loss">Weight loss</option>
+                                    <option value="fitness">Fitness / muscle & performance</option>
+                                    <option value="women-health">Women’s health & iron</option>
+                                    <option value="gluten-free">Gluten intolerance / can’t eat regular wheat</option>
+                                    <option value="general-health">General family health</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-join" style="margin-bottom: 1rem;">
+                            Auto-Recommend My Flour
+                        </button>
+                    </form>
+
+                    <div id="blendResult" class="recommendation-result hidden">
+                        <h3 class="recommendation-title" id="blendFlour"></h3>
+                        <p class="recommendation-subtitle" id="blendText"></p>
+
+                        <a id="blendNext" href="contact.html#order" class="btn btn-secondary">
+                            Next: Go to Order Page
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works / Scenario Flow -->
+    <section id="how-it-works" class="problem-section">
+        <div class="container">
+            <h2 class="section-title">How Flour Lab Works</h2>
             <div class="problem-grid">
                 <div class="problem-card">
-                    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=300&h=200&fit=crop" alt="Accessibility Gap" class="problem-image">
-                    <h3>Accessibility Gap</h3>
-                    <p>Many people lack access to affordable, quality skill training.</p>
+                    <img src="https://images.unsplash.com/photo-1585238342028-1aab82fa12b3?w=300&h=200&fit=crop" alt="User information" class="problem-image">
+                    <h3>Tell Us About Yourself</h3>
+                    <p>Users share age, gender, lifestyle (active, gym, office work, weight loss, etc.) and health goals such as diabetes control, fitness, or weight loss.</p>
                 </div>
                 <div class="problem-card">
-                    <img src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=300&h=200&fit=crop" alt="Geographic Barriers" class="problem-image">
-                    <h3>Geographic Barriers</h3>
-                    <p>Rural and low-income people face barriers to learning and earning.</p>
+                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=300&h=200&fit=crop" alt="Smart recommendations" class="problem-image">
+                    <h3>Smart Flour Recommendation</h3>
+                    <p>Our smart recommendation system analyzes your profile and suggests the best flour blend for your health and lifestyle.</p>
                 </div>
                 <div class="problem-card">
-                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=300&h=200&fit=crop" alt="Employment Challenges" class="problem-image">
-                    <h3>Employment Challenges</h3>
-                    <p>Limited opportunities for skill development and online income generation.</p>
+                    <img src="https://images.unsplash.com/photo-1516919549054-0a3b2960ad38?w=300&h=200&fit=crop" alt="Order flour" class="problem-image">
+                    <h3>Select & Order</h3>
+                    <p>Choose your flour category, pick a package size (500g or 1kg), and place your order with convenient Cash on Delivery (COD).</p>
+                </div>
+                <div class="problem-card">
+                    <img src="https://images.unsplash.com/photo-1604908176997-125188ba7223?w=300&h=200&fit=crop" alt="Home delivery" class="problem-image">
+                    <h3>Delivered to Your Home</h3>
+                    <p>Your fresh, customized flour blend is prepared and delivered to your doorstep—ready to use in your everyday meals.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Courses Section -->
-    <section id="courses" class="courses-section">
+    <!-- Product Categories -->
+    <section id="products" class="courses-section">
         <div class="container">
-            <h2 class="section-title">Our Courses</h2>
-            <p class="section-subtitle">Affordable, flexible, and accessible from home</p>
+            <h2 class="section-title">Flour Categories</h2>
+            <p class="section-subtitle">Smart flour solutions tailored to your body, health, and lifestyle</p>
             <div class="courses-grid">
-                <!-- Amazon VA Course -->
+                <!-- Gluten-Free Flour -->
                 <div class="course-card">
-                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=250&fit=crop" alt="Amazon VA" class="course-image">
-                    <h3>Amazon Virtual Assistant</h3>
-                    <p class="course-description">Master the skills needed to become a successful Amazon VA. Learn product research, listing optimization, customer service, and more.</p>
+                    <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?w=400&h=250&fit=crop" alt="Gluten Free Flour" class="course-image">
+                    <h3>Gluten-Free Flour</h3>
+                    <p class="course-description">Specially crafted for people with gluten intolerance and health-conscious users who want light, easy-to-digest meals.</p>
                     <ul class="course-features">
-                        <li>✓ Product Research & Optimization</li>
-                        <li>✓ Customer Service Management</li>
-                        <li>✓ Inventory Management</li>
-                        <li>✓ Marketing & Advertising</li>
+                        <li>✓ Easy on digestion</li>
+                        <li>✓ Supports weight management</li>
+                        <li>✓ Ideal for gluten-sensitive individuals</li>
+                        <li>✓ Great for rotis, parathas, and baking</li>
                     </ul>
                     <div class="course-footer">
-                        <span class="course-price">Low-Cost Pricing</span>
-                        <a href="contact.html" class="btn btn-course">Enroll Now</a>
+                        <span class="course-price">For gluten-sensitive & diet-conscious</span>
+                        <a href="contact.html" class="btn btn-course">Order Now</a>
                     </div>
                 </div>
 
-                <!-- Web Development Course -->
+                <!-- Diabetic-Friendly Flour -->
                 <div class="course-card featured">
-                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=250&fit=crop" alt="Web Development" class="course-image">
-                    <h3>Web Development</h3>
-                    <p class="course-description">Build modern, responsive websites from scratch. Learn HTML, CSS, JavaScript, and popular frameworks to start your career in tech.</p>
+                    <img src="https://images.unsplash.com/photo-1604908176997-125188ba7223?w=400&h=250&fit=crop" alt="Diabetic Friendly Flour" class="course-image">
+                    <h3>Diabetic-Friendly Flour</h3>
+                    <p class="course-description">A specialized low-glycemic blend designed to support blood sugar management without compromising on taste.</p>
                     <ul class="course-features">
-                        <li>✓ Frontend Development</li>
-                        <li>✓ Backend Fundamentals</li>
-                        <li>✓ Responsive Design</li>
-                        <li>✓ Portfolio Projects</li>
+                        <li>✓ Helps support blood sugar control</li>
+                        <li>✓ Rich in fiber for longer satiety</li>
+                        <li>✓ Supports an overall healthy lifestyle</li>
+                        <li>✓ Ideal for daily rotis and chapatis</li>
                     </ul>
                     <div class="course-footer">
-                        <span class="course-price">Low-Cost Pricing</span>
-                        <a href="contact.html" class="btn btn-course">Enroll Now</a>
+                        <span class="course-price">For diabetic & pre-diabetic users</span>
+                        <a href="contact.html" class="btn btn-course">Order Now</a>
                     </div>
                 </div>
 
-                <!-- Graphic Design Course -->
+                <!-- Multi-Grain Flour -->
                 <div class="course-card">
-                    <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=250&fit=crop" alt="Graphic Design" class="course-image">
-                    <h3>Graphic Design</h3>
-                    <p class="course-description">Create stunning visual designs using industry-standard tools. Learn design principles, branding, and digital art to express your creativity.</p>
+                    <img src="https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?w=400&h=250&fit=crop" alt="Multi Grain Flour" class="course-image">
+                    <h3>Multi-Grain Flour</h3>
+                    <p class="course-description">A balanced, family-friendly flour combining multiple whole grains for everyday nutrition and better digestion.</p>
                     <ul class="course-features">
-                        <li>✓ Design Fundamentals</li>
-                        <li>✓ Adobe Tools Mastery</li>
-                        <li>✓ Brand Identity Design</li>
-                        <li>✓ Digital Art & Illustration</li>
+                        <li>✓ Rich in vitamins and minerals</li>
+                        <li>✓ High in fiber for improved digestion</li>
+                        <li>✓ Suitable for all family members</li>
+                        <li>✓ Perfect for daily use in Pakistani homes</li>
                     </ul>
                     <div class="course-footer">
-                        <span class="course-price">Low-Cost Pricing</span>
-                        <a href="contact.html" class="btn btn-course">Enroll Now</a>
+                        <span class="course-price">For everyday family meals</span>
+                        <a href="contact.html" class="btn btn-course">Order Now</a>
                     </div>
                 </div>
-            </div>
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="courses.html" class="btn btn-primary">View All Courses</a>
+
+                <!-- High-Iron Women's Atta -->
+                <div class="course-card">
+                    <img src="https://images.unsplash.com/photo-1589924739087-75f6bcd91403?w=400&h=250&fit=crop" alt="High Iron Women Atta" class="course-image">
+                    <h3>High-Iron Women’s Atta</h3>
+                    <p class="course-description">Designed especially for women’s health with higher iron and supportive nutrients for energy and strength.</p>
+                    <ul class="course-features">
+                        <li>✓ Helps prevent iron deficiency</li>
+                        <li>✓ Supports bone and blood health</li>
+                        <li>✓ Boosts daily energy levels</li>
+                        <li>✓ Ideal for working women, mothers & students</li>
+                    </ul>
+                    <div class="course-footer">
+                        <span class="course-price">For women’s daily nutrition</span>
+                        <a href="contact.html" class="btn btn-course">Order Now</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Target Market Section -->
-    <section class="target-section">
+    <section id="target" class="target-section">
         <div class="container">
             <h2 class="section-title">Who We Serve</h2>
             <div class="target-grid">
                 <div class="target-card">
-                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=200&fit=crop" alt="Housewives" class="target-image">
-                    <h3>Housewives</h3>
-                    <p>Flexible learning opportunities to earn income from home while managing household responsibilities.</p>
+                    <img src="https://images.unsplash.com/photo-1574277260240-3de3c8b9da6b?w=300&h=200&fit=crop" alt="Diabetic population" class="target-image">
+                    <h3>Diabetic & Pre-Diabetic Users</h3>
+                    <p>People who need better blood sugar control but still want to enjoy traditional Pakistani meals every day.</p>
                 </div>
                 <div class="target-card">
-                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=300&h=200&fit=crop" alt="Students" class="target-image">
-                    <h3>Students</h3>
-                    <p>Affordable skill development to complement your education and build a strong career foundation.</p>
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=200&fit=crop" alt="Women" class="target-image">
+                    <h3>Women with Nutritional Needs</h3>
+                    <p>Women facing iron deficiency, low energy, and bone health challenges who need extra support through daily diet.</p>
                 </div>
                 <div class="target-card">
-                    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=300&h=200&fit=crop" alt="Rural Communities" class="target-image">
-                    <h3>Rural Communities</h3>
-                    <p>Breaking geographic barriers to bring quality education and income opportunities to underserved areas.</p>
+                    <img src="https://images.unsplash.com/photo-1598970605070-ffb66fba595c?w=300&h=200&fit=crop" alt="Fitness and gym users" class="target-image">
+                    <h3>Fitness & Gym Users</h3>
+                    <p>Health-conscious people, athletes, and gym members who want performance-focused rotis and chapatis.</p>
+                </div>
+                <div class="target-card">
+                    <img src="https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?w=300&h=200&fit=crop" alt="Families and children" class="target-image">
+                    <h3>Families & Children</h3>
+                    <p>Households looking for healthier, nutrient-rich flour options for kids, parents, and elders alike.</p>
                 </div>
             </div>
             <div class="target-highlight">
-                <p><strong>Why Choose Us:</strong> Affordable, flexible, and accessible from home. Thousands of potential learners in each city with high growth potential in the expanding digital economy.</p>
+                <p><strong>Why This Matters:</strong> Flour is used daily in every Pakistani home. By turning flour into a health tool, Flour Lab unlocks a high-demand, repeat-purchase product that quietly improves lives meal by meal.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Model & Revenue -->
+    <section id="business" class="about-section">
+        <div class="container">
+            <h2 class="section-title">Business Model & Revenue</h2>
+            <div class="about-content">
+                <div>
+                    <p class="about-description">
+                        Flour Lab operates as a digital-first food brand. Customers can discover their ideal flour blend
+                        through our website and place orders anytime with Cash on Delivery (COD). We also partner with gyms,
+                        nutritionists, and hospitals, and plan retail distribution and online marketplace presence to reach
+                        more households across Pakistan.
+                    </p>
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <span class="feature-icon">🛒</span>
+                            <div>
+                                <h4>Direct Online Orders</h4>
+                                <p>Orders placed via website or social channels with simple, trust-based COD payment.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🤝</span>
+                            <div>
+                                <h4>Institutional Partnerships</h4>
+                                <p>Collaborations with gyms, dietitians, and hospitals to recommend the right flour blends to their members and patients.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🏪</span>
+                            <div>
+                                <h4>Retail & Marketplaces</h4>
+                                <p>Availability in select retail stores and online marketplaces for repeat, high-frequency purchases.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">365</div>
+                        <div class="stat-label">Days of Daily Flour Use</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Average Rotis per Person</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">Repeat</div>
+                        <div class="stat-label">High-Frequency Reorders</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Flour Lab / Uniqueness -->
+    <section id="why-flour-lab" class="impact-section">
+        <div class="container">
+            <h2 class="section-title">Why Flour Lab Is Different</h2>
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="impact-icon">🌾</div>
+                    <h3>From Generic to Health-Based Flour</h3>
+                    <p>Traditional brands sell a single flour for everyone. Flour Lab offers health-focused flour categories designed for specific needs and life stages.</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon">💻</div>
+                    <h3>Technology-Driven Nutrition</h3>
+                    <p>Our digital platform collects lifestyle and health data to recommend the right flour blend for each customer.</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon">🚀</div>
+                    <h3>First-Mover Advantage</h3>
+                    <p>No major flour brand in Pakistan currently offers health-specific, tech-enabled flour solutions—giving Flour Lab a strong early edge.</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon">🏡</div>
+                    <h3>Why Customers Will Pay</h3>
+                    <p>We combine premium ingredients, personalized nutrition, and convenient home delivery into a simple, daily habit that fits every kitchen.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Future Expansion -->
+    <section id="future" class="sdg-section">
+        <div class="container">
+            <h2 class="section-title">Future Expansion</h2>
+            <div class="sdg-grid">
+                <div class="sdg-card">
+                    <div class="sdg-number">1</div>
+                    <h3>Healthy Baking Mixes</h3>
+                    <p>Ready-made mixes for breads, cakes, and snacks using our smart flour blends.</p>
+                </div>
+                <div class="sdg-card">
+                    <div class="sdg-number">2</div>
+                    <h3>Protein Roti Mix</h3>
+                    <p>High-protein flour options tailored for gym users, athletes, and fitness-conscious families.</p>
+                </div>
+                <div class="sdg-card">
+                    <div class="sdg-number">3</div>
+                    <h3>Healthy Meal Kits</h3>
+                    <p>Ready-to-cook kits that pair our flours with balanced sides for quick, nutritious meals.</p>
+                </div>
+                <div class="sdg-card">
+                    <div class="sdg-number">4</div>
+                    <h3>Flour Lab Mobile App</h3>
+                    <p>An easy-to-use app for flour recommendations, reordering, and tracking your health progress over time.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -195,38 +423,39 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>Empower<span class="logo-red">You</span></h3>
-                    <p>Learn. Earn. <span class="tagline-red">Grow.</span></p>
-                    <p class="footer-tagline">Empowering individuals through affordable, quality education.</p>
+                    <h3>Flour <span class="logo-red">Lab</span></h3>
+                    <p>Smart flour for everyday health.</p>
+                    <p class="footer-tagline">We are not just selling flour — we are providing personalized nutrition for every home.</p>
                 </div>
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="courses.html">Courses</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="impact.html">Impact</a></li>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#products">Flour Categories</a></li>
+                        <li><a href="#why-flour-lab">Why Flour Lab</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Courses</h4>
+                    <h4>Key Categories</h4>
                     <ul>
-                        <li><a href="courses.html">Amazon VA</a></li>
-                        <li><a href="courses.html">Web Development</a></li>
-                        <li><a href="courses.html">Graphic Design</a></li>
+                        <li><a href="#products">Gluten-Free Flour</a></li>
+                        <li><a href="#products">Diabetic-Friendly Flour</a></li>
+                        <li><a href="#products">Multi-Grain Flour</a></li>
+                        <li><a href="#products">High-Iron Women’s Atta</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Connect</h4>
                     <ul>
-                        <li><a href="contact.html">Join Us</a></li>
-                        <li><a href="team.html">Our Team</a></li>
-                        <li><a href="impact.html">SDG Goals</a></li>
+                        <li><a href="contact.html">Order / Contact</a></li>
+                        <li><a href="#business">Business Model</a></li>
+                        <li><a href="#future">Future Vision</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 EmpowerYou. All rights reserved. | Social Entrepreneurship Program</p>
+                <p>&copy; 2024 Flour Lab. All rights reserved. | Health-Focused Food Technology Startup</p>
             </div>
         </div>
     </footer>

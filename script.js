@@ -51,18 +51,7 @@ window.addEventListener('scroll', () => {
     lastScroll = currentScroll;
 });
 
-// Parallax Effect for Hero Section (subtle)
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    const heroContent = document.querySelector('.hero-content');
-    if (hero && scrolled < window.innerHeight) {
-        hero.style.transform = `translateY(${scrolled * 0.3}px)`;
-        if (heroContent) {
-            heroContent.style.opacity = Math.max(0, 1 - (scrolled / 400));
-        }
-    }
-});
+// (Disabled) Parallax / fade effect for hero so buttons stay visible when scrolling
 
 // Advanced Scroll Animations with Intersection Observer
 const observerOptions = {
@@ -120,100 +109,213 @@ document.addEventListener('mousemove', (e) => {
     });
 });
 
-// Form Submission with Backend API
-const contactForm = document.querySelector('.contact-form');
-const joinForm = document.getElementById('joinForm');
+// Shared helper for showing messages on forms
+const showFormMessage = (formMessageEl, text, type) => {
+    if (formMessageEl) {
+        formMessageEl.textContent = text;
+        formMessageEl.className = `form-message ${type}`;
+        formMessageEl.style.display = 'block';
 
-if (contactForm || joinForm) {
-    const form = contactForm || joinForm;
+        setTimeout(() => {
+            formMessageEl.style.display = 'none';
+        }, 5000);
+    } else {
+        alert(text);
+    }
+};
+
+// Flour order form - e‑commerce style
+const orderForm = document.getElementById('orderForm');
+
+if (orderForm) {
     const formMessage = document.getElementById('formMessage');
-    const submitBtn = document.getElementById('submitBtn') || form.querySelector('button[type="submit"]');
-    
-    form.addEventListener('submit', async (e) => {
+    const submitBtn = document.getElementById('submitBtn');
+
+    const flourType = document.getElementById('flourType');
+    const packageSize = document.getElementById('packageSize');
+    const quantity = document.getElementById('quantity');
+    const paymentMethod = document.getElementById('paymentMethod');
+
+    const customerName = document.getElementById('customerName');
+    const phone = document.getElementById('phone');
+    const email = document.getElementById('email');
+    const city = document.getElementById('city');
+    const address = document.getElementById('address');
+    const notes = document.getElementById('notes');
+
+    const summaryFlour = document.getElementById('summaryFlour');
+    const summarySize = document.getElementById('summarySize');
+    const summaryQty = document.getElementById('summaryQty');
+    const summaryPayment = document.getElementById('summaryPayment');
+    const summaryTotal = document.getElementById('summaryTotal');
+
+    // Simple estimated price table (can be adjusted later)
+    const priceTable = {
+        'Gluten-Free Flour': { '500g': 450, '1kg': 850 },
+        'Diabetic-Friendly Flour': { '500g': 480, '1kg': 900 },
+        'Multi-Grain Flour': { '500g': 420, '1kg': 780 },
+        'High-Iron Women’s Atta': { '500g': 460, '1kg': 860 }
+    };
+
+    const updateSummary = () => {
+        const flour = flourType.value || 'Not selected';
+        const size = packageSize.value || '500g';
+        const qty = parseInt(quantity.value || '1', 10);
+        const payment = paymentMethod.value === 'COD' ? 'Cash on Delivery' : paymentMethod.value;
+
+        summaryFlour.textContent = flour;
+        summarySize.textContent = size;
+        summaryQty.textContent = `${qty} pack${qty > 1 ? 's' : ''}`;
+        summaryPayment.textContent = payment;
+
+        if (priceTable[flour] && priceTable[flour][size]) {
+            const base = priceTable[flour][size];
+            const total = base * qty;
+            summaryTotal.textContent = `Rs. ${total.toLocaleString()} (approx.)`;
+        } else {
+            summaryTotal.textContent = 'Select flour & size';
+        }
+    };
+
+    // Prefill flour type from query param if available
+    const params = new URLSearchParams(window.location.search);
+    const flourParam = params.get('flour');
+    if (flourParam && flourType) {
+        Array.from(flourType.options).forEach(opt => {
+            if (opt.value === flourParam) {
+                opt.selected = true;
+            }
+        });
+    }
+
+    // Attach listeners to update summary live
+    [flourType, packageSize, quantity, paymentMethod].forEach(el => {
+        if (el) {
+            el.addEventListener('change', updateSummary);
+            el.addEventListener('input', updateSummary);
+        }
+    });
+
+    updateSummary();
+
+    orderForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
-        const nameInput = form.querySelector('#name') || form.querySelector('input[type="text"]');
-        const emailInput = form.querySelector('#email') || form.querySelector('input[type="email"]');
-        const courseInput = form.querySelector('#course') || form.querySelector('select');
-        const messageInput = form.querySelector('#message') || form.querySelector('textarea');
-        
-        const name = nameInput?.value;
-        const email = emailInput?.value;
-        const course = courseInput?.value;
-        const message = messageInput?.value || '';
-        
-        if (!name || !email || !course) {
-            // Shake animation for error
-            form.style.animation = 'shake 0.5s';
+
+        if (!customerName.value || !phone.value || !city.value || !address.value || !flourType.value) {
+            orderForm.style.animation = 'shake 0.5s';
             setTimeout(() => {
-                form.style.animation = '';
+                orderForm.style.animation = '';
             }, 500);
-            showMessage('Please fill in all required fields.', 'error');
+            showFormMessage(formMessage, 'Please fill in all required fields (name, phone, city, address, flour type).', 'error');
             return;
         }
-        
-        // Disable submit button
+
         if (submitBtn) {
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
+            submitBtn.textContent = 'Placing order...';
         }
-        
+
+        const payload = {
+            type: 'flour-order',
+            flourType: flourType.value,
+            packageSize: packageSize.value,
+            quantity: parseInt(quantity.value || '1', 10),
+            paymentMethod: paymentMethod.value,
+            name: customerName.value,
+            phone: phone.value,
+            email: email.value,
+            city: city.value,
+            address: address.value,
+            notes: notes.value
+        };
+
         try {
-            // Determine API URL - works for both local and Vercel
-            const apiUrl = '/api/contact';
-            
+            const apiUrl = 'https://script.google.com/macros/s/AKfycbxPY34mxoW3608ZYKASmXmAiUqwWoRUOxRp1WLNMAQdBuc8PCdTt0-7DI51jnrsgQRLUw/exec';
+
             const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    name,
-                    email,
-                    course,
-                    message
-                })
+                body: JSON.stringify(payload)
             });
-            
+
             const data = await response.json();
-            
+
             if (data.success) {
-                showMessage(data.message || 'Thank you! We have received your enrollment request. Check your email for confirmation.', 'success');
-                form.reset();
-                
-                // Success animation
-                form.style.transform = 'scale(0.98)';
+                showFormMessage(
+                    formMessage,
+                    data.message || 'Thank you! Your flour order has been received. Our team will contact you shortly to confirm delivery.',
+                    'success'
+                );
+                orderForm.reset();
+                updateSummary();
+
+                orderForm.style.transform = 'scale(0.98)';
                 setTimeout(() => {
-                    form.style.transform = 'scale(1)';
+                    orderForm.style.transform = 'scale(1)';
                 }, 200);
             } else {
-                showMessage(data.message || 'Sorry, there was an error. Please try again.', 'error');
+                showFormMessage(formMessage, data.message || 'Sorry, there was an error. Please try again.', 'error');
             }
         } catch (error) {
             console.error('Error:', error);
-            showMessage('Sorry, there was an error connecting to the server. Please check if the backend is running or try again later.', 'error');
+            showFormMessage(
+                formMessage,
+                'Sorry, there was an error connecting to the server. Please try again later.',
+                'error'
+            );
         } finally {
-            // Re-enable submit button
             if (submitBtn) {
                 submitBtn.disabled = false;
-                submitBtn.textContent = 'Join Us';
+                submitBtn.textContent = 'Place Order (Cash on Delivery)';
             }
         }
     });
-    
-    function showMessage(text, type) {
-        if (formMessage) {
-            formMessage.textContent = text;
-            formMessage.className = `form-message ${type}`;
-            formMessage.style.display = 'block';
-            
+}
+
+// Home page "Make your blend" mini-recommendation
+const blendForm = document.getElementById('blendForm');
+
+if (blendForm) {
+    const blendFlour = document.getElementById('blendFlour');
+    const blendText = document.getElementById('blendText');
+    const blendCard = document.getElementById('blendResult');
+    const blendNext = document.getElementById('blendNext');
+
+    blendForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const ageRange = document.getElementById('blendAge').value;
+        const gender = document.getElementById('blendGender').value;
+        const lifestyle = document.getElementById('blendLifestyle').value;
+        const healthGoal = document.getElementById('blendGoal').value;
+
+        if (!ageRange || !gender || !lifestyle || !healthGoal) {
+            blendForm.style.animation = 'shake 0.5s';
             setTimeout(() => {
-                formMessage.style.display = 'none';
-            }, 5000);
-        } else {
-            alert(text);
+                blendForm.style.animation = '';
+            }, 500);
+            return;
         }
-    }
+
+        const { flour, tagline } = getFlourRecommendation({
+            ageRange,
+            gender,
+            lifestyle,
+            healthGoal
+        });
+
+        blendFlour.textContent = flour;
+        blendText.textContent = tagline;
+
+        // Link to order page with flour pre-selected
+        const url = new URL(window.location.origin + '/contact.html');
+        url.searchParams.set('flour', flour);
+        blendNext.href = `${url.pathname}${url.search}#order`;
+
+        blendCard.classList.remove('hidden');
+    });
 }
 
 // Add shake animation
@@ -300,6 +402,115 @@ const statObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.stat-card').forEach(card => {
     statObserver.observe(card);
 });
+
+// Shared recommendation logic (smart flour match)
+const getFlourRecommendation = ({ ageRange, gender, lifestyle, healthGoal }) => {
+    // Base on primary health goal first
+    let flour = 'Multi-Grain Flour';
+    let tagline = 'Balanced everyday nutrition for your whole family.';
+    let benefits = [
+        'Rich in fiber, vitamins, and minerals',
+        'Supports digestion and daily energy',
+        'Suitable for kids, adults, and elders'
+    ];
+
+    if (healthGoal === 'gluten-free') {
+        flour = 'Gluten-Free Flour';
+        tagline = 'For gluten-sensitive and light-on-stomach meals.';
+        benefits = [
+            'Gentle on digestion',
+            'Ideal when you cannot eat regular wheat',
+            'Great for rotis, parathas, and baking'
+        ];
+    } else if (healthGoal === 'diabetes') {
+        flour = 'Diabetic-Friendly Flour';
+        tagline = 'Designed to support blood sugar management.';
+        benefits = [
+            'Low-glycemic flour blend',
+            'High in fiber to keep you full longer',
+            'Ideal for diabetics and pre-diabetics'
+        ];
+    } else if (healthGoal === 'women-health' || (gender === 'female' && ageRange !== '18-30')) {
+        flour = 'High-Iron Women’s Atta';
+        tagline = 'Extra support for women’s iron and bone health.';
+        benefits = [
+            'Helps prevent iron deficiency',
+            'Supports healthy blood and bones',
+            'Boosts daily strength and energy'
+        ];
+    } else if (healthGoal === 'fitness' || lifestyle === 'gym') {
+        flour = 'Multi-Grain Flour';
+        tagline = 'Whole-grain energy for active and gym lifestyles.';
+        benefits = [
+            'Slow-release energy for workouts',
+            'Better satiety versus regular wheat',
+            'Pairs well with high-protein meals'
+        ];
+    } else if (healthGoal === 'weight-loss' || lifestyle === 'weight-loss') {
+        flour = 'Gluten-Free Flour';
+        tagline = 'Light, easy-to-digest flour for weight management.';
+        benefits = [
+            'Helps avoid heavy, bloated feeling',
+            'Supports portion control and calorie awareness',
+            'Works for rotis, wraps, and baked snacks'
+        ];
+    }
+
+    return { flour, tagline, benefits };
+};
+
+// Recommendation form logic on dedicated page
+const recommendationForm = document.getElementById('recommendationForm');
+
+if (recommendationForm) {
+    const recResult = document.getElementById('recommendationResult');
+    const recName = document.getElementById('recName');
+    const recTagline = document.getElementById('recTagline');
+    const recBenefits = document.getElementById('recBenefits');
+    const recOrderLink = document.getElementById('recOrderLink');
+
+    recommendationForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const ageRange = document.getElementById('ageRange').value;
+        const gender = document.getElementById('gender').value;
+        const lifestyle = document.getElementById('lifestyleMatch').value;
+        const healthGoal = document.getElementById('healthGoalMatch').value;
+
+        if (!ageRange || !gender || !lifestyle || !healthGoal) {
+            recommendationForm.style.animation = 'shake 0.5s';
+            setTimeout(() => {
+                recommendationForm.style.animation = '';
+            }, 500);
+            return;
+        }
+
+        const { flour, tagline, benefits } = getFlourRecommendation({
+            ageRange,
+            gender,
+            lifestyle,
+            healthGoal
+        });
+
+        recName.textContent = flour;
+        recTagline.textContent = tagline;
+        recBenefits.innerHTML = '';
+        benefits.forEach(b => {
+            const li = document.createElement('li');
+            li.textContent = b;
+            recBenefits.appendChild(li);
+        });
+
+        if (recOrderLink) {
+            const url = new URL(window.location.origin + '/contact.html');
+            url.searchParams.set('flour', flour);
+            recOrderLink.href = `${url.pathname}${url.search}${'#order'}`;
+        }
+
+        recResult.classList.remove('hidden');
+        recResult.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+}
 
 // Cursor Trail Effect (optional, can be disabled for performance)
 let cursorTrail = [];
