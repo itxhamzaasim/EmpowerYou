@@ -309,10 +309,9 @@ if (blendForm) {
         blendFlour.textContent = flour;
         blendText.textContent = tagline;
 
-        // Link to order page with flour pre-selected
-        const url = new URL(window.location.origin + '/contact.html');
-        url.searchParams.set('flour', flour);
-        blendNext.href = `${url.pathname}${url.search}#order`;
+        // Link to order page with flour pre-selected (relative URL so it works locally and when hosted)
+        const encodedFlour = encodeURIComponent(flour);
+        blendNext.href = `contact.html?flour=${encodedFlour}#order`;
 
         blendCard.classList.remove('hidden');
     });
@@ -502,9 +501,8 @@ if (recommendationForm) {
         });
 
         if (recOrderLink) {
-            const url = new URL(window.location.origin + '/contact.html');
-            url.searchParams.set('flour', flour);
-            recOrderLink.href = `${url.pathname}${url.search}${'#order'}`;
+            const encodedFlour = encodeURIComponent(flour);
+            recOrderLink.href = `contact.html?flour=${encodedFlour}#order`;
         }
 
         recResult.classList.remove('hidden');
